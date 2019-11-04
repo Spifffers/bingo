@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<style>
+.card {
+     float : left;
+     padding-right : 30px;
+}
+.button{
+    width: 100px;
+    height : 50px;
+}
+
+.total{
+    font-size: 40px;
+}
+</style>
+<head>
+    <title>Space Clicker</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    var totalCost = 0;
+    
+    function onClick(inc, colorId, costId) {
+        let counter = parseInt(document.getElementById(colorId).getAttribute('data-counter'));
+        let cost = parseInt(document.getElementById(costId).getAttribute('data-cost'));
+        let unit = parseInt(document.getElementById(costId).getAttribute('data-unit'));
+        counter += inc;
+        if(counter < 0) {
+          counter = 0
+        }
+        cost = counter * unit;
+        document.getElementById(colorId).setAttribute('data-counter', counter);
+        document.getElementById(colorId).innerHTML = counter;
+        document.getElementById(costId).setAttribute('data-cost', cost);
+        document.getElementById(costId).innerHTML = cost;
+        calcTotal();
+    };
+    
+    function calcTotal() {
+        totalCost = parseInt(document.getElementById('redcost').getAttribute('data-cost')) +
+                    parseInt(document.getElementById('greencost').getAttribute('data-cost')) +
+                    parseInt(document.getElementById('bluecost').getAttribute('data-cost'));
+         
+                    
+        document.getElementById('total').innerHTML = totalCost;
+    }
+    
+    function onReset() {
+        totalCost = 0
+        document.getElementById('total').innerHTML = totalCost;
+        
+        document.getElementById('reds').setAttribute('data-counter', 0);
+        document.getElementById('reds').innerHTML = 0;
+        document.getElementById('redcost').setAttribute('data-cost', 0);
+        document.getElementById('redcost').innerHTML = 0;
+        
+        document.getElementById('blues').setAttribute('data-counter', 0);
+        document.getElementById('blues').innerHTML = 0;
+        document.getElementById('bluecost').setAttribute('data-cost', 0);
+        document.getElementById('bluecost').innerHTML = 0;
+        
+        document.getElementById('greens').setAttribute('data-counter', 0);
+        document.getElementById('greens').innerHTML = 0;
+        document.getElementById('greencost').setAttribute('data-cost', 0);
+        document.getElementById('greencost').innerHTML = 0;
+        
+        
+    }
+    </script>
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSleozYA3r1Cka8NyYO2fnRml7irRMqzI1PIKEwNp_TYsgj7HRp&s" alt="Trulli" width="100
+        " height="100"> 
+        <br>
+        <a>$1</a><br>
+        <button class="button" type="button" width="50" height="50" onClick="onClick(1, 'reds', 'redcost')">Click me+</button>
+        <br>
+        <button class="button" type="button" onClick="onClick(-1, 'reds', 'redcost')">Click me-</button>
+        <br>
+        Count: <a id="reds" data-counter=0>0</a>
+        <br>
+        Cost: <a id="redcost" data-cost=0 data-unit=1>0</a>
+    </div>
+    
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPdydYOpUk3nkMor2feDEd3NRZkm0cFTwASzkUIsfww6IOZ8j-&s" alt="Trulli" width="100
+        " height="100"> 
+        <br>
+        <a>$2</a><br>
+        <button class="button" type="button" width="50" height="50" onClick="onClick(1, 'blues', 'bluecost')">Click me+</button>
+        <br>
+        <button class="button" type="button" onClick="onClick(-1, 'blues', 'bluecost')">Click me-</button>
+        <br>
+        Count: <a id="blues" data-counter=0>0</a>
+        <br>
+        Cost: <a id="bluecost" data-cost=0 data-unit=2>0</a>
+    </div>
+    
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGKyGJtoq0UZGTpYqvP04dK0k3MjKsvpc5-WiTmkz0gTQUVyeVIQ&s" alt="Trulli" width="100
+        " height="100"> 
+        <br>
+        <a>$3</a><br>
+        <button class="button" type="button" width="50" height="50" onClick="onClick(1, 'greens', 'greencost')">Click me+</button>
+        <br>
+        <button class="button" type="button" onClick="onClick(-1, 'greens', 'greencost')">Click me-</button>
+        <br>
+        Count: <a id="greens" data-counter=0>0</a>
+        <br>
+        Cost: <a id="greencost" data-cost=0 data-unit=3>0</a>
+        <br>
+    </div>
+    
+    Total: <a class="total" id="total">0</a>
+    <button type="button" onClick="onReset()">Reset</button>
+    
+</body></html>
