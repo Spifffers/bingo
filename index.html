@@ -5,11 +5,24 @@
      float : left;
      padding-right : 30px;
 }
-.button{
-    width: 100px;
+.incButton{
+    padding-top : 5px;
+    width: 50px;
     height : 50px;
+    font-size : 40px;
 }
 
+.resetButton{
+    padding-top : 5px;
+    width: 70px;
+    height : 50px;
+    font-size : 20px;
+}
+
+.counter{
+    padding-left : 10px;
+    font-size : 40px;
+}
 .total{
     font-size: 40px;
 }
@@ -18,23 +31,45 @@
     <title>Space Clicker</title>
 </head>
 
-<body>
+<body onload="onLoadFunction()">
     <script type="text/javascript">
     var totalCost = 0;
+    var redUnitCost = 1;
+    var greenUnitCost = 2;
+    var blueUnitCost = 3;
     
-    function onClick(inc, colorId, costId) {
+    
+    function onLoadFunction() {
+        document.getElementById("redunitcost").innerHTML = '$' + redUnitCost;
+        document.getElementById("greenunitcost").innerHTML = '$' + greenUnitCost;
+        document.getElementById("blueunitcost").innerHTML = '$' + blueUnitCost;
+    }
+    
+    function onClick(inc, colorId) {
         let counter = parseInt(document.getElementById(colorId).getAttribute('data-counter'));
-        let cost = parseInt(document.getElementById(costId).getAttribute('data-cost'));
-        let unit = parseInt(document.getElementById(costId).getAttribute('data-unit'));
+        let cost = parseInt(document.getElementById(colorId + 'cost').getAttribute('data-cost'));
+        let unitCost = 0;
+        switch (colorId) {
+            case "red":
+                unitCost = redUnitCost;
+                break;
+            case "blue":
+                unitCost = blueUnitCost;
+                break;
+            case "green":
+                unitCost = greenUnitCost;
+                break;
+            default:
+        }
         counter += inc;
         if(counter < 0) {
           counter = 0
         }
-        cost = counter * unit;
+        cost = counter * unitCost;
         document.getElementById(colorId).setAttribute('data-counter', counter);
         document.getElementById(colorId).innerHTML = counter;
-        document.getElementById(costId).setAttribute('data-cost', cost);
-        document.getElementById(costId).innerHTML = cost;
+        document.getElementById(colorId + 'cost').setAttribute('data-cost', cost);
+        document.getElementById(colorId + 'cost').innerHTML = '$' + cost;
         calcTotal();
     };
     
@@ -44,25 +79,25 @@
                     parseInt(document.getElementById('bluecost').getAttribute('data-cost'));
          
                     
-        document.getElementById('total').innerHTML = totalCost;
+        document.getElementById('total').innerHTML = '$' + totalCost;
     }
     
     function onReset() {
         totalCost = 0
         document.getElementById('total').innerHTML = totalCost;
         
-        document.getElementById('reds').setAttribute('data-counter', 0);
-        document.getElementById('reds').innerHTML = 0;
+        document.getElementById('red').setAttribute('data-counter', 0);
+        document.getElementById('red').innerHTML = 0;
         document.getElementById('redcost').setAttribute('data-cost', 0);
         document.getElementById('redcost').innerHTML = 0;
         
-        document.getElementById('blues').setAttribute('data-counter', 0);
-        document.getElementById('blues').innerHTML = 0;
+        document.getElementById('blue').setAttribute('data-counter', 0);
+        document.getElementById('blue').innerHTML = 0;
         document.getElementById('bluecost').setAttribute('data-cost', 0);
         document.getElementById('bluecost').innerHTML = 0;
         
-        document.getElementById('greens').setAttribute('data-counter', 0);
-        document.getElementById('greens').innerHTML = 0;
+        document.getElementById('green').setAttribute('data-counter', 0);
+        document.getElementById('green').innerHTML = 0;
         document.getElementById('greencost').setAttribute('data-cost', 0);
         document.getElementById('greencost').innerHTML = 0;
         
@@ -73,46 +108,37 @@
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSleozYA3r1Cka8NyYO2fnRml7irRMqzI1PIKEwNp_TYsgj7HRp&s" alt="Trulli" width="100
         " height="100"> 
         <br>
-        <a>$1</a><br>
-        <button class="button" type="button" width="50" height="50" onClick="onClick(1, 'reds', 'redcost')">Click me+</button>
+        <a id="redunitcost">$1</a> each<br>
+        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'red')">+</button><a id="red" class="counter" data-counter=0>0</a><br>
+        <button class="incButton" type="button" onClick="onClick(-1, 'red')">-</button>
         <br>
-        <button class="button" type="button" onClick="onClick(-1, 'reds', 'redcost')">Click me-</button>
-        <br>
-        Count: <a id="reds" data-counter=0>0</a>
-        <br>
-        Cost: <a id="redcost" data-cost=0 data-unit=1>0</a>
+        <a id="redcost" data-cost=0>$0</a>
     </div>
     
     <div class="card">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPdydYOpUk3nkMor2feDEd3NRZkm0cFTwASzkUIsfww6IOZ8j-&s" alt="Trulli" width="100
         " height="100"> 
         <br>
-        <a>$2</a><br>
-        <button class="button" type="button" width="50" height="50" onClick="onClick(1, 'blues', 'bluecost')">Click me+</button>
+        <a id="blueunitcost">$2</a> each<br>
+        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'blue')">+</button><a id="blue" class="counter" data-counter=0>0</a><br>
+        <button class="incButton" type="button" onClick="onClick(-1, 'blue')">-</button>
         <br>
-        <button class="button" type="button" onClick="onClick(-1, 'blues', 'bluecost')">Click me-</button>
-        <br>
-        Count: <a id="blues" data-counter=0>0</a>
-        <br>
-        Cost: <a id="bluecost" data-cost=0 data-unit=2>0</a>
+        <a id="bluecost" data-cost=0>$0</a>
     </div>
     
     <div class="card">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGKyGJtoq0UZGTpYqvP04dK0k3MjKsvpc5-WiTmkz0gTQUVyeVIQ&s" alt="Trulli" width="100
         " height="100"> 
         <br>
-        <a>$3</a><br>
-        <button class="button" type="button" width="50" height="50" onClick="onClick(1, 'greens', 'greencost')">Click me+</button>
+        <a id="greenunitcost">$3</a> each<br>
+        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'green')">+</button><a id="green" class="counter" data-counter=0>0</a><br>
+        <button class="incButton" type="button" onClick="onClick(-1, 'green')">-</button>
         <br>
-        <button class="button" type="button" onClick="onClick(-1, 'greens', 'greencost')">Click me-</button>
-        <br>
-        Count: <a id="greens" data-counter=0>0</a>
-        <br>
-        Cost: <a id="greencost" data-cost=0 data-unit=3>0</a>
+        <a id="greencost" data-cost=0>$0</a>
         <br>
     </div>
     
-    Total: <a class="total" id="total">0</a>
-    <button type="button" onClick="onReset()">Reset</button>
+    Total: <a class="total" id="total">$0</a><br>
+    <button type="button" class="resetButton" onClick="onReset()">Reset</button>
     
 </body></html>
