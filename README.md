@@ -1,10 +1,10 @@
-## Welcome to GitHub Pages
+## Welcome to Bingo Calculator
 
 Use this link to test out the app.
 
-[Link]https://spifffers.github.io/bingo/
+https://spifffers.github.io/bingo/
 
-[Image](https://i.imgur.com/08uk9id.png)
+![Bingo Calc](bingo.jpg)
 
 
 ## Welcome to GitHub Pages
