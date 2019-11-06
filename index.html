@@ -9,6 +9,16 @@
      float : left;
      padding-right : 30px;
 }
+
+.bingopic {
+     width : 100px;
+     height : 100px;
+}
+.bingopicdouble {
+     width : 100px;
+     height : 75px;
+     padding-bottom : 25px;
+}
 .incButton{
     padding-top : 5px;
     width: 50px;
@@ -32,39 +42,32 @@
 }
 </style>
 <head>
-    <title>Bingo Calculator</title>
+    <title>Space Clicker</title>
 </head>
 
 <body onload="onLoadFunction()">
     <script type="text/javascript">
+    var cardColors    = ["red", "blue", "aqua", "gray", "black", "brown", "double"];
+    var cardUnitCosts = [1    , 2     , 3     , 4     , 5      , 6       , 7       ];
     var totalCost = 0;
-    var redUnitCost = 1;
-    var greenUnitCost = 2;
+    var redUnitCost = 2;
+    var aquaUnitCost = 2;
     var blueUnitCost = 3;
     
     
     function onLoadFunction() {
-        document.getElementById("redunitcost").innerHTML = '$' + redUnitCost;
-        document.getElementById("greenunitcost").innerHTML = '$' + greenUnitCost;
-        document.getElementById("blueunitcost").innerHTML = '$' + blueUnitCost;
+        cardColors.forEach( function(element) {
+            document.getElementById(element + "unitcost").innerHTML = '$' + cardUnitCosts[cardColors.indexOf(element)];
+        });
+        
+        
     }
     
     function onClick(inc, colorId) {
         let counter = parseInt(document.getElementById(colorId).getAttribute('data-counter'));
         let cost = parseInt(document.getElementById(colorId + 'cost').getAttribute('data-cost'));
-        let unitCost = 0;
-        switch (colorId) {
-            case "red":
-                unitCost = redUnitCost;
-                break;
-            case "blue":
-                unitCost = blueUnitCost;
-                break;
-            case "green":
-                unitCost = greenUnitCost;
-                break;
-            default:
-        }
+        let unitCost = cardUnitCosts[cardColors.indexOf(colorId)];
+        
         counter += inc;
         if(counter < 0) {
           counter = 0
@@ -78,11 +81,10 @@
     };
     
     function calcTotal() {
-        totalCost = parseInt(document.getElementById('redcost').getAttribute('data-cost')) +
-                    parseInt(document.getElementById('greencost').getAttribute('data-cost')) +
-                    parseInt(document.getElementById('bluecost').getAttribute('data-cost'));
-         
-                    
+        let totalCost = 0;
+        cardColors.forEach( function(element) {
+            totalCost+= parseInt(document.getElementById(element + 'cost').getAttribute('data-cost'));
+        });
         document.getElementById('total').innerHTML = '$' + totalCost;
     }
     
@@ -90,29 +92,18 @@
         totalCost = 0
         document.getElementById('total').innerHTML = totalCost;
         
-        document.getElementById('red').setAttribute('data-counter', 0);
-        document.getElementById('red').innerHTML = 0;
-        document.getElementById('redcost').setAttribute('data-cost', 0);
-        document.getElementById('redcost').innerHTML = 0;
-        
-        document.getElementById('blue').setAttribute('data-counter', 0);
-        document.getElementById('blue').innerHTML = 0;
-        document.getElementById('bluecost').setAttribute('data-cost', 0);
-        document.getElementById('bluecost').innerHTML = 0;
-        
-        document.getElementById('green').setAttribute('data-counter', 0);
-        document.getElementById('green').innerHTML = 0;
-        document.getElementById('greencost').setAttribute('data-cost', 0);
-        document.getElementById('greencost').innerHTML = 0;
-        
-        
+        cardColors.forEach( function(element) {
+            document.getElementById(element).setAttribute('data-counter', 0);
+            document.getElementById(element).innerHTML = 0;
+            document.getElementById(element+'cost').setAttribute('data-cost', 0);
+            document.getElementById(element+'cost').innerHTML = 0;
+        });
     }
     </script>
     <div class="card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSleozYA3r1Cka8NyYO2fnRml7irRMqzI1PIKEwNp_TYsgj7HRp&s" alt="Trulli" width="100
-        " height="100"> 
+        <img class="bingopic" src="bingored.png" alt="red"> 
         <br>
-        <a id="redunitcost">$1</a> each<br>
+        <a id="redunitcost"></a> each<br>
         <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'red')">+</button><a id="red" class="counter" data-counter=0>0</a><br>
         <button class="incButton" type="button" onClick="onClick(-1, 'red')">-</button>
         <br>
@@ -120,10 +111,20 @@
     </div>
     
     <div class="card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPdydYOpUk3nkMor2feDEd3NRZkm0cFTwASzkUIsfww6IOZ8j-&s" alt="Trulli" width="100
-        " height="100"> 
+        <img class="bingopic" src="bingoaqua.png" alt="aqua"> 
         <br>
-        <a id="blueunitcost">$2</a> each<br>
+        <a id="aquaunitcost"></a> each<br>
+        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'aqua')">+</button><a id="aqua" class="counter" data-counter=0>0</a><br>
+        <button class="incButton" type="button" onClick="onClick(-1, 'aqua')">-</button>
+        <br>
+        <a id="aquacost" data-cost=0>$0</a>
+        <br>
+    </div>
+    
+    <div class="card">
+        <img class="bingopic" src="bingoblue.png" alt="blue"> 
+        <br>
+        <a id="blueunitcost"></a> each<br>
         <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'blue')">+</button><a id="blue" class="counter" data-counter=0>0</a><br>
         <button class="incButton" type="button" onClick="onClick(-1, 'blue')">-</button>
         <br>
@@ -131,15 +132,43 @@
     </div>
     
     <div class="card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGKyGJtoq0UZGTpYqvP04dK0k3MjKsvpc5-WiTmkz0gTQUVyeVIQ&s" alt="Trulli" width="100
-        " height="100"> 
+        <img class="bingopic" src="bingoblack.png" alt="black"> 
         <br>
-        <a id="greenunitcost">$3</a> each<br>
-        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'green')">+</button><a id="green" class="counter" data-counter=0>0</a><br>
-        <button class="incButton" type="button" onClick="onClick(-1, 'green')">-</button>
+        <a id="blackunitcost"></a> each<br>
+        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'black')">+</button><a id="black" class="counter" data-counter=0>0</a><br>
+        <button class="incButton" type="button" onClick="onClick(-1, 'black')">-</button>
         <br>
-        <a id="greencost" data-cost=0>$0</a>
+        <a id="blackcost" data-cost=0>$0</a>
+    </div>
+    
+    <div class="card">
+        <img class="bingopic" src="bingogray.png" alt="gray"> 
         <br>
+        <a id="grayunitcost"></a> each<br>
+        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'gray')">+</button><a id="gray" class="counter" data-counter=0>0</a><br>
+        <button class="incButton" type="button" onClick="onClick(-1, 'gray')">-</button>
+        <br>
+        <a id="graycost" data-cost=0>$0</a>
+    </div>
+   
+    <div class="card">
+        <img class="bingopic" src="bingobrown.png" alt="brown"> 
+        <br>
+        <a id="brownunitcost"></a> each<br>
+        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'brown')">+</button><a id="brown" class="counter" data-counter=0>0</a><br>
+        <button class="incButton" type="button" onClick="onClick(-1, 'brown')">-</button>
+        <br>
+        <a id="browncost" data-cost=0>$0</a>
+    </div>   
+    
+    <div class="card">
+        <img class="bingopicdouble" src="bingodouble.png" alt="double"> 
+        <br>
+        <a id="doubleunitcost"></a> each<br>
+        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'double')">+</button><a id="double" class="counter" data-counter=0>0</a><br>
+        <button class="incButton" type="button" onClick="onClick(-1, 'double')">-</button>
+        <br>
+        <a id="doublecost" data-cost=0>$0</a>
     </div>
     
     Total: <a class="total" id="total">$0</a><br>
