@@ -4,7 +4,7 @@ Use this link to test out the app.
 
 https://spifffers.github.io/bingo/
 
-![Bingo Calc](bingo.jpg)
+
 
 
 ## Welcome to GitHub Pages
