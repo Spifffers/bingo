@@ -5,13 +5,22 @@
       touch-action: manipulation;
   }
   
+.cardContainer {
+    display : inline-block;
+}
+
+.totalContainer {
+    display : inline-block;
+    text-align: center;
+}
+
 .card {
      float : left;
      padding-right : 10px;
 }
 
 .lastcard {
-     float : left;
+    
 }
 
 .bingopic {
@@ -31,10 +40,11 @@
 }
 
 .resetButton{
-    padding-top : 5px;
-    width: 70px;
+    margin-left : 10px;
+    width: 100px;
     height : 50px;
     font-size : 20px;
+    
 }
 
 .counter{
@@ -56,6 +66,16 @@
     var totalCost = 0;
     
     function onLoadFunction() {
+        var cardContainer = document.createElement("div");
+        cardContainer.id = "cardContainer";
+        cardContainer.classList.add("cardContainer");
+        var totalContainer = document.createElement("div");
+        totalContainer.id = "totalContainer";
+        totalContainer.classList.add("totalContainer");
+        
+        document.body.appendChild(cardContainer);
+        document.body.appendChild(document.createElement("br"));
+        document.body.appendChild(totalContainer);
         cardColors.forEach( function(element) {
             
             var div1 = document.createElement("div");
@@ -105,7 +125,7 @@
             a4.innerHTML = "$0";
             div1.appendChild(a4);
             
-            document.body.appendChild(div1);
+            cardContainer.appendChild(div1);
         
             document.getElementById(element + "unitcost").innerHTML = '  @ $' + cardUnitCosts[cardColors.indexOf(element)];
         });
@@ -113,74 +133,30 @@
         var div1 = document.createElement("div");
         div1.classList.add("lastcard");
         
+        cardContainer.appendChild(div1);
+        
         var a1 = document.createElement("a");
+        a1.setAttribute("style","font-size: 20px");
         a1.innerHTML = "Total: ";
-        div1.appendChild(a1);
-        div1.appendChild(document.createElement("br"));
+        totalContainer.appendChild(a1);
+        //totalContainer.appendChild(document.createElement("br"));
         
         var a2 = document.createElement("a");
         a2.id = "total";
-        div1.classList.add("total");
+        a2.classList.add("total");
         a2.innerHTML = "$0";
-        div1.appendChild(a2);
-        div1.appendChild(document.createElement("br"));
+        totalContainer.appendChild(a2);
+        //div1.appendChild(document.createElement("br"));
         
         var button1 = document.createElement("button");
         button1.classList.add("resetButton");
         button1.setAttribute("onClick","onReset()");
         button1.innerHTML = "Reset";
-        div1.appendChild(button1);
+        totalContainer.appendChild(button1);
         
-        document.body.appendChild(div1);
+        console.log(cardContainer.offsetWidth);
+        totalContainer.style.width = cardContainer.offsetWidth + "px";
         
-//        var div1 = document.createElement("div");
-//        div1.classList.add("card");
-//        var img1 = document.createElement("img");
-//        img1.classList.add("bingopic");
-//        img1.src = "bingored.png";
-//        img1.alt = "bingopic";
-//        div1.appendChild(img1);
-//        div1.appendChild(document.createElement("br"));
-//        
-//        var a1 = document.createElement("a");
-//        a1.id="red";
-//        a1.classList.add("counter");
-//        a1.setAttribute("data-counter", 0);
-//        div1.appendChild(a1);
-//        div1.appendChild(document.createElement("br"));
-//        
-//        var button1 = document.createElement("button");
-//        button1.classList.add("incButton");
-//        button1.setAttribute("onClick","onClick(1,'red')");
-//        button1.innerHTML = "+";
-//        div1.appendChild(button1);
-//        div1.appendChild(document.createElement("br"));
-//        
-//        var button2 = document.createElement("button");
-//        button2.classList.add("incButton");
-//        button2.setAttribute("onClick","onClick(-1,'red')");
-//        button2.innerHTML = "-";
-//        div1.appendChild(button2);
-//        div1.appendChild(document.createElement("br"));
-//        
-//        var a2 = document.createElement("a");
-//        a2.id="redunitcost";
-//        a2.innerHTML = "";
-//        div1.appendChild(a2);
-//        
-//        var a3 = document.createElement("a");
-//        a3.innerHTML = " each";
-//        div1.appendChild(a3);
-//        
-//        div1.appendChild(document.createElement("br"));
-//        
-//        var a4 = document.createElement("a");
-//        a4.id="redcost";
-//        a4.setAttribute("data-cost", 0);
-//        a4.innerHTML = "$0";
-//        div1.appendChild(a4);
-//        
-//        document.body.appendChild(div1);
         
     }
     
@@ -211,99 +187,17 @@
     
     function onReset() {
         totalCost = 0
-        document.getElementById('total').innerHTML = totalCost;
+        document.getElementById('total').innerHTML = "$"+totalCost;
         
         cardColors.forEach( function(element) {
             document.getElementById(element).setAttribute('data-counter', 0);
             document.getElementById(element).innerHTML = 0;
             document.getElementById(element+'cost').setAttribute('data-cost', 0);
-            document.getElementById(element+'cost').innerHTML = 0;
+            document.getElementById(element+'cost').innerHTML = "$0";
         });
     }
     </script>
-<!--    
-    <div class="card">
-        <img class="bingopic" src="bingoblack.png" alt="black"> 
-        <br>
-        <a id="black" class="counter" style="float:center" data-counter=0>0</a><br>
-        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'black')">+</button><br>
-        <button class="incButton" type="button" onClick="onClick(-1, 'black')">-</button>
-        <br>
-        <a id="blackunitcost"></a> each<br>
-        <a id="blackcost" data-cost=0>$0</a>
-    </div>
     
-    <div class="card">
-        <img class="bingopic" src="bingogray.png" alt="gray"> 
-        <br>
-        <a id="grayunitcost"></a> each<br>
-        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'gray')">+</button><a id="gray" class="counter" data-counter=0>0</a><br>
-        <button class="incButton" type="button" onClick="onClick(-1, 'gray')">-</button>
-        <br>
-        <a id="graycost" data-cost=0>$0</a>
-    </div>
-    
-    <div class="card">
-        <img class="bingopic" src="bingobrown.png" alt="brown"> 
-        <br>
-        <a id="brownunitcost"></a> each<br>
-        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'brown')">+</button><a id="brown" class="counter" data-counter=0>0</a><br>
-        <button class="incButton" type="button" onClick="onClick(-1, 'brown')">-</button>
-        <br>
-        <a id="browncost" data-cost=0>$0</a>
-    </div>  
-    
-    <div class="card">
-        <img class="bingopic" src="bingoaqua.png" alt="aqua"> 
-        <br>
-        <a id="aquaunitcost"></a> each<br>
-        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'aqua')">+</button><a id="aqua" class="counter" data-counter=0>0</a><br>
-        <button class="incButton" type="button" onClick="onClick(-1, 'aqua')">-</button>
-        <br>
-        <a id="aquacost" data-cost=0>$0</a>
-        <br>
-    </div>
-    
-    <div class="card">
-        <img class="bingopic" src="bingonavy.png" alt="navy"> 
-        <br>
-        <a id="navyunitcost"></a> each<br>
-        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'navy')">+</button><a id="navy" class="counter" data-counter=0>0</a><br>
-        <button class="incButton" type="button" onClick="onClick(-1, 'navy')">-</button>
-        <br>
-        <a id="navycost" data-cost=0>$0</a>
-    </div>
-    
-     <div class="card">
-        <img class="bingopic" src="bingopurple.png" alt="purple"> 
-        <br>
-        <a id="purpleunitcost"></a> each<br>
-        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'purple')">+</button><a id="purple" class="counter" data-counter=0>0</a><br>
-        <button class="incButton" type="button" onClick="onClick(-1, 'purple')">-</button>
-        <br>
-        <a id="purplecost" data-cost=0>$0</a>
-    </div>
-    
-    <div class="card">
-        <img class="bingopic" src="bingored.png" alt="red"> 
-        <br>
-        <a id="redunitcost"></a> each<br>
-        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'red')">+</button><a id="red" class="counter" data-counter=0>0</a><br>
-        <button class="incButton" type="button" onClick="onClick(-1, 'red')">-</button>
-        <br>
-        <a id="redcost" data-cost=0>$0</a>
-    </div>
-    
-    <div class="card">
-        <img class="bingopicdouble" src="bingodouble.png" alt="double"> 
-        <br>
-        <a id="doubleunitcost"></a> each<br>
-        <button class="incButton" type="button" width="50" height="50" onClick="onClick(1, 'double')">+</button><a id="double" class="counter" data-counter=0>0</a><br>
-        <button class="incButton" type="button" onClick="onClick(-1, 'double')">-</button>
-        <br>
-        <a id="doublecost" data-cost=0>$0</a>
-    </div>
--->    
     
     
 </body></html>
