@@ -11,6 +11,7 @@
 
 .totalContainer {
     display : inline-block;
+    height: 300px;
     text-align: center;
 }
 
@@ -62,7 +63,7 @@
 <body onload="onLoadFunction()">
     <script type="text/javascript">
     var cardColors    = ["black", "gray", "brown", "aqua", "navy", "purple", "red", "double"];
-    var cardUnitCosts = [1      , 2     , 2      , 2     , 2     , 2       , 3    , 3   ];
+    var cardUnitCosts = [1      , 1     , 2      , 2     , 2     , 2       , 3    , 3   ];
     var totalCost = 0;
     
     function onLoadFunction() {
@@ -130,10 +131,10 @@
             document.getElementById(element + "unitcost").innerHTML = '  @ $' + cardUnitCosts[cardColors.indexOf(element)];
         });
         
-        var div1 = document.createElement("div");
-        div1.classList.add("lastcard");
+        //var div1 = document.createElement("div");
+        //div1.classList.add("lastcard");
         
-        cardContainer.appendChild(div1);
+        //cardContainer.appendChild(div1);
         
         var a1 = document.createElement("a");
         a1.setAttribute("style","font-size: 20px");
