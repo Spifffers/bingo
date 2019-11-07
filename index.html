@@ -60,9 +60,9 @@
 <head>
     <title>Space Clicker</title>
 </head>
-      
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes" /> 
+
 
 <body onload="onLoadFunction()">
     <script type="text/javascript">
@@ -70,8 +70,8 @@
     var cardUnitCosts = [1      , 1     , 2      , 2     , 2     , 2       , 3    , 3   ];
     var totalCost = 0;
     
-    window.addEventListener("load", function() { window.scrollTo(0, 1); });
-          
+    window.addEventListener("load", function() { setTimeout( function(){ window.scrollTo(0, 1); }, 50 ); });
+    
     function onLoadFunction() {
         var cardContainer = document.createElement("div");
         cardContainer.id = "cardContainer";
@@ -161,7 +161,6 @@
         console.log(cardContainer.offsetWidth);
         totalContainer.style.width = cardContainer.offsetWidth + "px";
         
-        
         document.body.appendChild(document.createElement("br"));
         var comments = document.createElement("a");
         comments.innerHTML = "send comments/requests/suggestions to ";
@@ -171,8 +170,6 @@
         email.setAttribute("href", "mailto:kevinck@gmail.com?Subject=BingoCalculator");
         email.innerHTML = "kevinck@gmail.com";
         document.body.appendChild(email);
-        
-        
     }
     
     function onClick(inc, colorId) {
@@ -213,6 +210,7 @@
     }
     </script>
     
+    <button onClick="window.scrollTo(0,1)"> scrooll </button>
     
     
 </body></html>
