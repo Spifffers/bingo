@@ -83,7 +83,11 @@
             var div1 = document.createElement("div");
             div1.classList.add("card");
             var img1 = document.createElement("img");
-            img1.classList.add("bingopic");
+            if(element == "double") {
+                img1.classList.add("bingopicdouble");
+            } else {
+                img1.classList.add("bingopic");
+            }
             img1.src = "bingo"+element+".png";
             img1.alt = "bingo"+element;
             div1.appendChild(img1);
@@ -132,23 +136,16 @@
             document.getElementById(element + "unitcost").innerHTML = '  @ $' + cardUnitCosts[cardColors.indexOf(element)];
         });
         
-        //var div1 = document.createElement("div");
-        //div1.classList.add("lastcard");
-        
-        //cardContainer.appendChild(div1);
-        
         var a1 = document.createElement("a");
         a1.setAttribute("style","font-size: 20px");
         a1.innerHTML = "Total: ";
         totalContainer.appendChild(a1);
-        //totalContainer.appendChild(document.createElement("br"));
         
         var a2 = document.createElement("a");
         a2.id = "total";
         a2.classList.add("total");
         a2.innerHTML = "$0";
         totalContainer.appendChild(a2);
-        //div1.appendChild(document.createElement("br"));
         
         var button1 = document.createElement("button");
         button1.classList.add("resetButton");
