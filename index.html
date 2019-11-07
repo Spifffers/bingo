@@ -10,6 +10,10 @@
      padding-right : 30px;
 }
 
+.lastcard {
+     float : left;
+}
+
 .bingopic {
      width : 100px;
      height : 100px;
@@ -50,17 +54,11 @@
     var cardColors    = ["red", "blue", "aqua", "gray", "black", "brown", "double"];
     var cardUnitCosts = [1    , 2     , 3     , 4     , 5      , 6       , 7       ];
     var totalCost = 0;
-    var redUnitCost = 2;
-    var aquaUnitCost = 2;
-    var blueUnitCost = 3;
-    
     
     function onLoadFunction() {
         cardColors.forEach( function(element) {
             document.getElementById(element + "unitcost").innerHTML = '$' + cardUnitCosts[cardColors.indexOf(element)];
         });
-        
-        
     }
     
     function onClick(inc, colorId) {
@@ -170,10 +168,10 @@
         <br>
         <a id="doublecost" data-cost=0>$0</a>
     </div>
-    <div width=50>
-    </div>
     
-    Total: <a class="total" id="total">$0</a><br>
-    <button type="button" class="resetButton" onClick="onReset()">Reset</button>
+    <div class="lastcard">
+        Total: <a class="total" id="total">$0</a><br>
+        <button type="button" class="resetButton" onClick="onReset()">Reset</button>
+    </div>
     
 </body></html>
