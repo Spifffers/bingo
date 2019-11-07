@@ -7,7 +7,7 @@
   
 .card {
      float : left;
-     padding-right : 30px;
+     padding-right : 10px;
 }
 
 .lastcard {
@@ -24,9 +24,9 @@
      padding-bottom : 25px;
 }
 .incButton{
-    padding-top : 5px;
-    width: 50px;
-    height : 50px;
+    margin-bottom : 5px;
+    width: 100px;
+    height : 75px;
     font-size : 40px;
 }
 
@@ -71,8 +71,13 @@
             a1.id=element;
             a1.classList.add("counter");
             a1.setAttribute("data-counter", 0);
-            a1.innerHTML = "$0";
+            a1.innerHTML = "0";
             div1.appendChild(a1);
+            
+            var a1b = document.createElement("a");
+            a1b.id=element+"unitcost";
+            a1b.innerHTML = "  @";
+            div1.appendChild(a1b);
             div1.appendChild(document.createElement("br"));
             
             var button1 = document.createElement("button");
@@ -93,13 +98,7 @@
             a2.id=element+"unitcost";
             a2.innerHTML = "";
             div1.appendChild(a2);
-            
-            var a3 = document.createElement("a");
-            a3.innerHTML = " each";
-            div1.appendChild(a3);
-            
-            div1.appendChild(document.createElement("br"));
-            
+               
             var a4 = document.createElement("a");
             a4.id=element+"cost";
             a4.setAttribute("data-cost", 0);
@@ -108,7 +107,7 @@
             
             document.body.appendChild(div1);
         
-            document.getElementById(element + "unitcost").innerHTML = '$' + cardUnitCosts[cardColors.indexOf(element)];
+            document.getElementById(element + "unitcost").innerHTML = '  @ $' + cardUnitCosts[cardColors.indexOf(element)];
         });
         
         var div1 = document.createElement("div");
