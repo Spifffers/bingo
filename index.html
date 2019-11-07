@@ -157,6 +157,17 @@
         totalContainer.style.width = cardContainer.offsetWidth + "px";
         
         
+        document.body.appendChild(document.createElement("br"));
+        var comments = document.createElement("a");
+        comments.innerHTML = "send comments/requests/suggestions to ";
+        document.body.appendChild(comments);
+          
+        var email = document.createElement("a");
+        email.setAttribute("href", "mailto:kevinck@gmail.com?Subject=BingoCalculator");
+        email.innerHTML = "kevinck@gmail.com";
+        document.body.appendChild(email);
+        
+        
     }
     
     function onClick(inc, colorId) {
